@@ -1,3 +1,7 @@
+# sleeper_project
+
+Welcome to the sleeper project - attempting to put all my scattered bits & pieces of learned development to use in a data analysis project for fantasy football statistics
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
