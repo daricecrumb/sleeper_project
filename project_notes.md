@@ -1,12 +1,33 @@
 Collecting notes/hints for myself for this project
 
 
+NEXT STEPS
+1. basic api endpoint?
+2. figure out how to run the backend (look at gpt questions)
+3. upload git repo for backend
+4. api frontend
+5. chart.js
+6. make interaction happen between user input & chart output
+
+
+
+OTHER NOTES
+
+
+PROBLEMS FOUND:
+1. stop data from being added multiple times. every time player_stats.py is run, data is duplicated
+2. only call active players in the player_info api, the majority of players aren't active, so calling them all is inefficient
+3. player_stats.py takes ~2min to execute successfully - make this faster
+4. figure out how to not 'run' the python formulas whenever files are imported - probably by separating the 'get' formulas from the 'send' formulas into 2 different files
+
+how to run backend
+
 1. To execute api_calls.py, run it from the terminal
 2. Launch psql from pgadmin to access the database directly, unsure how to access specific database from general psql terminal
     a. command to execute the psql file is \i ${filepath}
     b. ^ could maybe program this into the .sql file?
 
-NEXT STEPS
+initial plan
 1. run small test with web app that can send http requests to backend
     a. boilerplate html page
     b. number 1-100 textbox, save as `player_id`
@@ -16,15 +37,6 @@ NEXT STEPS
     f. after submit, return player_name from player_info based on `player_id` in blue textbox
 2. figure out how to filter out if a player was hurt or not for a given week, since active player data is throwing off the standard deviation calculations
 3. calculate projections
-
-
-
-
-PROBLEMS FOUND:
-1. stop data from being added multiple times. every time player_stats.py is run, data is duplicated
-2. only call active players in the player_info api, the majority of players aren't active, so calling them all is inefficient
-3. player_stats.py takes ~2min to execute successfully - make this faster
-4. figure out how to not 'run' the python formulas whenever files are imported - probably by separating the 'get' formulas from the 'send' formulas into 2 different files
 
 
 QUERIES
@@ -54,7 +66,7 @@ limit 50
 
 2. 
 
-—ADD—
+more notes
 Backend Setup:
 * 		API Endpoints: Develop API endpoints using a backend framework like Django, Flask, or FastAPI to handle user requests and fetch data from the PostgreSQL database.
 * 		Data Processing: Create functions in the backend to process data, perform calculations, and generate necessary dataframes based on user inputs. Ensure these operations are optimized for speed and efficiency.
@@ -63,3 +75,6 @@ Frontend Setup:
 * 		React Components: Develop React components to capture user input (e.g., forms, buttons) and send requests to the backend API endpoints upon user interaction.
 * 		Chart.js Integration: Utilize Chart.js to render charts within the React components. Set up the charts to accept data fetched from the backend.
 * 		API Integration: Implement functions to make asynchronous requests to the backend API endpoints using tools like fetch or libraries like Axios.
+
+
+
