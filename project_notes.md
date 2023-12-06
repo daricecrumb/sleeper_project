@@ -2,12 +2,15 @@ Collecting notes/hints for myself for this project
 
 
 NEXT STEPS
-1. basic api endpoint?
+1. basic api endpoint? - DONE
 2. figure out how to run the backend (look at gpt questions)
-3. upload git repo for backend
-4. api frontend
-5. chart.js
-6. make interaction happen between user input & chart output
+    a. upload data from api into vercel postgresql
+    b. make endpoint function manipulate the postgresql data based on an input variable
+3. api frontend
+    a. input variable from a frontend input
+    b. send variable to api endpoint
+4. chart.js
+5. make interaction happen between user input & chart output
 
 
 
