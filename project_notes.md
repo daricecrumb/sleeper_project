@@ -4,12 +4,16 @@ Collecting notes/hints for myself for this project
 NEXT STEPS
 1. basic api endpoint? - DONE
 2. figure out how to run the backend (look at gpt questions)
-    a. upload data from api into vercel postgresql
-    b. make endpoint function manipulate the postgresql data based on an input variable
+    a. create vercel postgresql database & table
+    b. upload player data from api into vercel postgresql table
+        i. https://stackoverflow.com/questions/77093626/vercel-postgres-bulk-insert-building-sql-query-dynamically-from-array
+    c. do same with the scoring settings & the stats
+    d. make endpoint function manipulate the postgresql data based on an input variable
 3. api frontend
     a. input variable from a frontend input
     b. send variable to api endpoint
 4. chart.js
+    a. https://towardsdatascience.com/django-pandas-and-chart-js-for-a-quick-dashboard-e261bce38bee
 5. make interaction happen between user input & chart output
 
 
@@ -22,6 +26,7 @@ PROBLEMS FOUND:
 2. only call active players in the player_info api, the majority of players aren't active, so calling them all is inefficient
 3. player_stats.py takes ~2min to execute successfully - make this faster
 4. figure out how to not 'run' the python formulas whenever files are imported - probably by separating the 'get' formulas from the 'send' formulas into 2 different files
+5. running the 'add_player_info' route.js file takes like 8 minutes, so need to figure out how to pre-emptively filter out only the QB, RB, WR, and TE from the list, because there are a lot of DB/OL in the list
 
 how to run backend
 
