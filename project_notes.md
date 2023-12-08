@@ -4,17 +4,20 @@ Collecting notes/hints for myself for this project
 NEXT STEPS
 1. basic api endpoint? - DONE
 2. figure out how to run the backend (look at gpt questions)
-    a. create vercel postgresql database & table
-    b. upload player data from api into vercel postgresql table
+    a. DONE - create vercel postgresql database & table
+    b. DONE - upload player data from api into vercel postgresql table
         i. https://stackoverflow.com/questions/77093626/vercel-postgres-bulk-insert-building-sql-query-dynamically-from-array
-    c. do same with the scoring settings & the stats
-    d. make endpoint function manipulate the postgresql data based on an input variable
+    c. make endpoint function manipulate the postgresql data based on an input variable
+        i. START HERE - app.py, figure out how to connect to database!!!!!
 3. api frontend
     a. input variable from a frontend input
     b. send variable to api endpoint
-4. chart.js
+4. finish backend
+    c. do same with the scoring settings & the stats
+    d. add manipulations to data that can be called by endpoints
+5. chart.js
     a. https://towardsdatascience.com/django-pandas-and-chart-js-for-a-quick-dashboard-e261bce38bee
-5. make interaction happen between user input & chart output
+6. make interaction happen between user input & chart output
 
 
 
