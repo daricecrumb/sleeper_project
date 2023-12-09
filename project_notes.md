@@ -15,6 +15,7 @@ NEXT STEPS
 4. finish backend
     c. do same with the scoring settings & the stats
     d. add manipulations to data that can be called by endpoints
+    e. don't forget to add the routes & urls to CORS
 5. chart.js
     a. https://towardsdatascience.com/django-pandas-and-chart-js-for-a-quick-dashboard-e261bce38bee
 6. make interaction happen between user input & chart output
