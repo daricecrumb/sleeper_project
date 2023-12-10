@@ -30,24 +30,7 @@ function App() {
       console.error('Error fetching data:', error);
     }
   };
-/*
-  const reqres = async () => {
-    try {
-      const response = await fetch('https://reqres.in/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ testreqres: inputValue})
-      });
-      const data2 = await response.json();
-      setTestData(data2.data);
-      console.log(data2)
-    } catch (error) {
-      console.error('error fetching data: ', error)
-    }
-  };
-*/
+
   return (
     <>
       <div>
@@ -61,7 +44,8 @@ function App() {
           value={inputValue}
           onChange={(e) => {
             setInputValue(e.target.value);
-            console.log(e.target.value);
+            console.log(e.target.value)
+            console.log(fetchedData);
           }}
         />
         <button onClick={sendDataToFlask}>Submit</button>

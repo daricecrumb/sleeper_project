@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app) 
      #resources={r"/get_player_id": {"origins": "http://localhost:3000"}})
 #CORS(app, resources=r'api/get_player_id')
-# DONT FORGET TO ADD PROD URL HERE
+# DONT FORGET TO ADD PROD URL HERE...if needed?
 
 # Load environment variables from .env.development.local
 env_path = '../.env.development.local' 
@@ -50,20 +50,11 @@ def get_data():
         # Fetch the data
         fetched_data = cursor.fetchall()
         # Close the cursor and the connection
-        cursor.close()
-        connection.close()
+        #cursor.close()
+        #connection.close()
         
         # Return the fetched data as a JSON response
-        return jsonify({'data': fetched_data})
-
-@app.route('/reqres', methods=['POST'])
-def reqres():
-    if request.method == 'POST':
-        data = request.get_json()
-        variable = data.get('testreqres')
-        return jsonify({data:"reqres"+variable})
-
-        
+        return jsonify({'data': fetched_data})        
 
 # Define a route
 @app.route('/hello')
