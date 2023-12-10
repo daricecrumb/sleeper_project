@@ -1,33 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 import './App.css'
 
+const supabase = createClient('https://lovmqlrpfkmuhbduoejl.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxvdm1xbHJwZmttdWhiZHVvZWpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDIyMzczMjEsImV4cCI6MjAxNzgxMzMyMX0.sUEICYW0UuStRK8EsWRWhDG9Dyk_wHUvDxO3vvHQAu0')
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [players, setPlayers] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [fetchedData, setFetchedData] = useState(null);
+
+  useEffect(() => {
+    getPlayers();
+  }, []);
+
+  async function getPlayers() {
+    const { data } = await supabase.from("player_info").select();
+    setPlayers(data);
+  }
+
+  const sendDataToFlask = async () => {
+    try {
+      // somehow get the player id to be input here
+      const { data, error } = await supabase
+        .from('player_info')
+        .select()
+        .eq('player_id', inputValue) 
+      setFetchedData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          capital H Hard capital D Data
+        </p>
+        <p>
+          capital A analysis
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        <input
+          name="firstInput"
+          type="text"
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            console.log(e.target.value);
+          }}
+        />
+        <button onClick={sendDataToFlask}>Submit</button>
+      </div>
+      {/* Display the fetched data */}
+      {fetchedData && (
+        <div>
+          <h2>Fetched Data:</h2>
+          <pre>{JSON.stringify(fetchedData, null, 2)}</pre>
+        </div>
+      )}
     </>
   )
 }
