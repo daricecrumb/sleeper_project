@@ -2,13 +2,13 @@ Collecting notes/hints for myself for this project
 
 
 NEXT STEPS
-1. basic api endpoint? - DONE
-2. figure out how to run the backend (look at gpt questions)
+1. DONE - basic api endpoint?
+2. DONE - figure out how to run the backend (look at gpt questions)
     a. DONE - create vercel postgresql database & table
     b. DONE - upload player data from api into vercel postgresql table
         i. https://stackoverflow.com/questions/77093626/vercel-postgres-bulk-insert-building-sql-query-dynamically-from-array
-    c. make endpoint function manipulate the postgresql data based on an input variable
-        i. app.py, figure out how to connect to database on production site (https://sleeper-project.vercel.app/)
+    c. DONE - make endpoint function manipulate the postgresql data based on an input variable
+        i. DONE - app.py, figure out how to connect to database on production site (https://sleeper-project.vercel.app/)
             1. started prisma database - DONE
             2. after i migrate the change, i should test out querying the database (CRUD) here: https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/querying-the-database-typescript-postgresql
                 i. prisma client won't see the pets database to run a test, figure out why it isn't visible
@@ -16,16 +16,24 @@ NEXT STEPS
                 iii. START HERE, example of react+next+prisma - https://github.com/prisma/prisma-examples/tree/latest/javascript/rest-nextjs
                     1. FIGURE OUT WHY PETS NOT ON `npx prisma studio` & why player_info db empty.....
             3. then i have to figure out how to make sure prisma is hosting my backend server
-3. api frontend
+        note: i officially have a deployment that works on https://sleeper-project-vite.vercel.app/ where i can submit a number into a input box and it outputs from a query from my supabase database - now i have to 
+            a. put all the data into supabase
+            b. build queries based on input values
+            c. chart.js
+3. DONE - send requests from frontend
     a. input variable from a frontend input - DONE
     b. send variable to api endpoint - DONE
-    c. confirm it works on production
-        i. figure out why vercel deployment is blocking on CORS resource
-        
+    c. confirm it works on production - DONE
+        i. figure out why vercel deployment is blocking on CORS resource - DONE
 4. finish backend
-    c. do same with the scoring settings & the stats
-    d. add manipulations to data that can be called by endpoints
-    e. don't forget to add the routes & urls to CORS
+    a. input the rest of the data from player_info
+        i. data is not writing to db programmatically (using localhost:3000) - figure out why...
+        ii. error inserting data into supabase - debugging with insomnia api and `node .` on root directory with the `index.js` file - seems to be working well, now to figure out why supabase won't work
+        ii. update - worked!! supabase wasn't working because of grant permissions, due to prisma bug, which were sorted here: https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public
+        iii. now need to delete the current data from db and then write the whole db correctly from api
+    b. do same with the scoring settings & the stats
+    c. add manipulations to data that can be called by endpoints
+    d. don't forget to add the routes & urls to CORS
 5. chart.js
     a. https://towardsdatascience.com/django-pandas-and-chart-js-for-a-quick-dashboard-e261bce38bee
 6. make interaction happen between user input & chart output

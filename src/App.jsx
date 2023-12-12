@@ -20,7 +20,6 @@ function App() {
 
   const sendDataToFlask = async () => {
     try {
-      // somehow get the player id to be input here
       const { data, error } = await supabase
         .from('player_info')
         .select()

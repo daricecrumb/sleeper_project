@@ -1,1 +1,3 @@
-{}
+{
+  "/api/sb_add_player_info/route": "app/api/sb_add_player_info/route.js"
+}
