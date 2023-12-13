@@ -30,7 +30,7 @@ NEXT STEPS
         i. data is not writing to db programmatically (using localhost:3000) - figure out why...
         ii. error inserting data into supabase - debugging with insomnia api and `node .` on root directory with the `index.js` file - seems to be working well, now to figure out why supabase won't work
         ii. update - worked!! supabase wasn't working because of grant permissions, due to prisma bug, which were sorted here: https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public
-        iii. now need to delete the current data from db and then write the whole db correctly from api
+        iii. DONE - now need to delete the current data from db and then write the whole db correctly from api
     b. do same with the scoring settings & the stats
     c. add manipulations to data that can be called by endpoints
     d. don't forget to add the routes & urls to CORS

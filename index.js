@@ -6,29 +6,6 @@ const port = 8080;
 app.use(express.json())
 const supabase = createClient('https://lovmqlrpfkmuhbduoejl.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxvdm1xbHJwZmttdWhiZHVvZWpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDIyMzczMjEsImV4cCI6MjAxNzgxMzMyMX0.sUEICYW0UuStRK8EsWRWhDG9Dyk_wHUvDxO3vvHQAu0');
 
-// gets info from hitting url
-app.get('/tshirt', (req,res) => {
-    res.status(200).send({
-        tshirt:'y',
-        size:'s'
-    })
-});
-
-// capture dynamic values, allow user to add data to db
-app.post('/tshirt/:id', (req, res) => {
-    const { id } = req.params;
-    const { logo } = req.body
-
-    if(!logo) {
-        res.status(418).send({message: 'we need a logo'})
-        console.log("logopa")
-    }
-    // if valid response
-    res.send({
-        tshirt: `tshirt with your ${logo} and id of ${id}`
-    })
-});
-
 app.delete('/delete_player_info', async (req,res) => {
     console.log("start req")
     const first_name = "Jeremy"
@@ -40,7 +17,6 @@ app.delete('/delete_player_info', async (req,res) => {
         .delete()
         .eq('first_name',first_name)
         .eq('last_name',last_name)
-        console.log( await supabase.from('player_info').select())
 
     console.log("after function")
     if (error) {
@@ -114,16 +90,7 @@ app.post('/node_exp_add_player_info', async (req, res) => {
         const validPositions = ['QB', 'WR', 'RB', 'TE'];
         return validPositions.includes(player.position);
       });
-      
-      
-
-/*
-    const pDataTest = [
-        {"player_id":"1","first_name":"GJ","last_name":"Kinne","team":"null","position":"QB","age":28,"years_exp":1},
-        {"player_id":"4","first_name":"Roddy","last_name":"White","team":"null","position":"WR","age":38,"years_exp":15},
-        {"player_id":"5","first_name":"Dallas","last_name":"Clark","team":"null","position":"TE","age":38,"years_exp":11}
-    ];
-*/
+    console.log(filteredPlayers.length)
     
     // Insert modified data into Supabase
     const insertPromises = filteredPlayers.map(async (player) => {
@@ -144,15 +111,12 @@ app.post('/node_exp_add_player_info', async (req, res) => {
             console.log(error);
             console.log('Error inserting data into Supabase');
         }
-        console.log(player);
+        // console.log(player);
     });
     
-
     console.log("before await promises");
     await Promise.all(insertPromises);
     console.log("after promises");
-
-
 
     const { data: playerInfo, error } = await supabase
         .from('player_info')
@@ -165,6 +129,151 @@ app.post('/node_exp_add_player_info', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+app.post('/add_player_stats', async (req,res) => {
+    try {
+        // get scoring settings
+        const settings = await fetch('https://api.sleeper.app/v1/league/937433485218869248');
+            if (!settings.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const rawData = await settings.json();
+            
+            const desiredSettings = [
+                'pass_yd', 'pass_td', 'pass_2pt', 'pass_int', 'pass_int_td',
+                'rush_yd', 'rush_td', 'rush_2pt', 'rush_td_40p',
+                'rec', 'rec_yd', 'rec_td', 'rec_2pt', 'rec_td_40p',
+                'fum_lost', 'fum_rec_td'
+            ]
+
+            const scoringSettings = Object.keys(rawData.scoring_settings)
+                .filter(key => desiredSettings.includes(key))
+                .reduce((obj, key) => {
+                    obj[key] = rawData.scoring_settings[key];
+                    return obj;
+                }, {});
+
+            console.log("successfully pulled settings")
+
+        // iterate through weeks & seasons
+        const seasons = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+        const weeks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+        let successfulAdd = []
+        let errorCount = 0
+        for (let x of seasons) {
+            console.log(`season ${x}`)
+            for (let y of weeks) {
+                console.log(`week ${y}`)
+
+                const statsAPI = await fetch(`https://api.sleeper.app/stats/nfl/${x}/${y}?season_type=regular&position[]=QB&position[]=RB&position[]=TE&position[]=WR&order_by=ppr`)
+                if (!statsAPI.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const rawStats = await statsAPI.json();
+                const statsArray = Object.values(rawStats);
+
+                // format api response into data we want
+                const cleanStats = statsArray.map(player => ({
+                    player_id: String(player.player_id),
+                    team: String(player.team),
+                    season: parseInt(player.season),
+                    week: parseInt(player.week),
+                    off_snp: parseFloat(player.stats?.off_snp || player.stats?.snp || 0.0),
+                    tm_off_snp: parseFloat(player.stats?.tm_off_snp || 0.0),
+                    pass_yd: parseFloat(player.stats?.pass_yd || 0.0),
+                    pass_td: parseFloat(player.stats?.pass_td || 0.0),
+                    pass_2pt: parseFloat(player.stats?.pass_2pt || 0.0),
+                    pass_int: parseFloat(player.stats?.pass_int || 0.0),
+                    pass_int_td: parseFloat(player.stats?.pass_int_td || 0.0),
+                    rush_yd: parseFloat(player.stats?.rush_yd || 0.0),
+                    rush_td: parseFloat(player.stats?.rush_td || 0.0),
+                    rush_2pt: parseFloat(player.stats?.rush_2pt || 0.0),
+                    rush_td_40p: parseFloat(player.stats?.rush_td_40p || 0.0),
+                    rec: parseFloat(player.stats?.rec || 0.0),
+                    rec_yd: parseFloat(player.stats?.rec_yd || 0.0),
+                    rec_td: parseFloat(player.stats?.rec_td || 0.0),
+                    rec_2pt: parseFloat(player.stats?.rec_2pt || 0.0),
+                    rec_td_40p: parseFloat(player.stats?.rec_td_40p || 0.0),
+                    fum_lost: parseFloat(player.stats?.fum_lost || 0.0),
+                    fum_rec_td: parseFloat(player.stats?.fum_rec_td || 0.0),
+                }));
+                
+                // Calculate points for each row
+                const pointsColumn = await Promise.all(cleanStats.map(async(row) => {
+                    let points = 0;
+                
+                    // Iterate over the keys in the row
+                    for (const key in row) {
+                        if (key in scoringSettings) {
+                            points += row[key] * scoringSettings[key];
+                        }
+                    }
+                
+                    return parseFloat(points.toFixed(2)); // Round to two decimal places
+                }));
+                
+                // Append the 'points' column to the cleanStats array
+                const cleanStatsWithPoints = cleanStats.map((row, index) => ({
+                    ...row,
+                    points: pointsColumn[index],
+                })); 
+                
+                console.log("have stats ready, about to add to supabase")
+
+                // have to map this to be able to insert
+                const insertStats = await Promise.all(cleanStatsWithPoints.map(async (player) => {
+                    const { player_id, team, season, week, off_snp, tm_off_snp, pass_yd, pass_td, pass_2pt, pass_int, pass_int_td, rush_yd, rush_td, rush_2pt, rush_td_40p, rec, rec_yd, rec_td, rec_2pt, rec_td_40p, fum_lost, fum_rec_td, points } = player;
+                    const { error } = await supabase
+                        .from('player_stats')
+                        .upsert({ 
+                            player_id: player_id,
+                            team: team,
+                            season: season,
+                            week: week,
+                            off_snp: off_snp,
+                            tm_off_snp: tm_off_snp,
+                            pass_yd: pass_yd,
+                            pass_td: pass_td,
+                            pass_2pt: pass_2pt,
+                            pass_int: pass_int,
+                            pass_int_td: pass_int_td,
+                            rush_yd: rush_yd,
+                            rush_td: rush_td,
+                            rush_2pt: rush_2pt,
+                            rush_td_40p: rush_td_40p,
+                            rec: rec,
+                            rec_yd: rec_yd,
+                            rec_td: rec_td,
+                            rec_2pt: rec_2pt,
+                            rec_td_40p: rec_td_40p,
+                            fum_lost: fum_lost,
+                            fum_rec_td: fum_rec_td,
+                            points: points },
+                            { onConflict: 'player_id, season, week'}
+                        )
+                    if (error) {
+                        console.log(error);
+                        errorCount+=1
+                        console.log(`Error inserting data into Supabase for player_id: ${player_id}`);
+                    }
+                }));
+                
+                successfulAdd.push(`week ${x}, season ${y}; `)
+                console.log(successfulAdd)
+            };
+        };
+        console.log("outside season loop")
+        console.log("inserting into supabase errorCount: "+errorCount)
+        // change this when we add stats
+        res.status(200).json({ message: `successfully added players from ${successfulAdd}` });
+    } catch (error) {
+        console.log("error thrown from outer try catch")
+        console.log(error)
+        res.status(500).json({ error: error.message });
+    }
+})
 
 // starts server
 app.listen(
