@@ -31,12 +31,21 @@ NEXT STEPS
         ii. error inserting data into supabase - debugging with insomnia api and `node .` on root directory with the `index.js` file - seems to be working well, now to figure out why supabase won't work
         ii. update - worked!! supabase wasn't working because of grant permissions, due to prisma bug, which were sorted here: https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public
         iii. DONE - now need to delete the current data from db and then write the whole db correctly from api
-    b. do same with the scoring settings & the stats
+    b. DONE - do same with the scoring settings & the stats
     c. add manipulations to data that can be called by endpoints
-    d. don't forget to add the routes & urls to CORS
+        i. START HERE
+        ii. figure out what charts we wanna show
+        iii. figure out the file system to call api endpoint based on input
+        iv. start with one chart, stdev v avg pts for a season (eventually, would be cool to add ranges here - i.e. range from s21w14 - s23w3)
+        v. then add ppr finishes chart showing tiers
+        vi. do i need app/api folder??
 5. chart.js
     a. https://towardsdatascience.com/django-pandas-and-chart-js-for-a-quick-dashboard-e261bce38bee
 6. make interaction happen between user input & chart output
+7. make pretty
+    i. add favicon
+    ii. move over to daricecrumb.com
+    iii. add a loading graphic
 
 
 
