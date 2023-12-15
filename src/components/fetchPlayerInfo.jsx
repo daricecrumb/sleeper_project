@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 function FetchPlayerInfo({ supabase, onDataFetched }) {
-    const [fetchedData, setFetchedData] = useState(null);
     const [inputValue, setInputValue] = useState('');
 
     const getPlayerInfo = async () => {
@@ -10,12 +9,10 @@ function FetchPlayerInfo({ supabase, onDataFetched }) {
                 .from('player_info')
                 .select()
                 .eq('player_id', inputValue);
-                setFetchedData(data);
                 if (error) {
                 console.log('Error fetching data:', error);
                 return;
             }
-            setFetchedData(data);
             // Pass the fetched data back to the parent component (App.js)
             onDataFetched(data);
         } catch (error) {
@@ -25,6 +22,7 @@ function FetchPlayerInfo({ supabase, onDataFetched }) {
 
     return (
         <>
+            <p>player info test</p>
             {/* input and button */}
             <input
                 name="firstInput"

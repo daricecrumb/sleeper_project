@@ -39,8 +39,13 @@ NEXT STEPS
         iv. start with one chart, stdev v avg pts for a season (eventually, would be cool to add ranges here - i.e. range from s21w14 - s23w3)
         v. then add ppr finishes chart showing tiers
         vi. do i need app/api folder??
-5. chart.js
-    a. https://towardsdatascience.com/django-pandas-and-chart-js-for-a-quick-dashboard-e261bce38bee
+5. using plotly instead of chart.js, because plotly can put markers on datapoints on scatterplots
+    a. https://plotly.com/javascript/line-and-scatter/#data-labels-on-the-plot
+    b. ADDED CHART!!! updates on input!!!
+        i. remove floating toolbar
+        ii. make chart somewhat readable
+    c. add another chart
+
 6. make interaction happen between user input & chart output
 7. make pretty
     i. add favicon
