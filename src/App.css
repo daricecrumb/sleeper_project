@@ -8,6 +8,10 @@
   margin-top: 40px;
 }
 
+.dropdown {
+  width: 200px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -31,8 +31,15 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2em;
   line-height: 1.1;
+  font-weight: 700; /* Custom boldness */
+  font-family: 'Gill Sans', sans-serif;
+}
+
+div {
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 button {

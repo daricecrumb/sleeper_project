@@ -17,6 +17,7 @@ function App() {
   return (
     <>
       <div>
+        <h1>Mostly Legal Fantasy Football</h1>
         <p>
           capital H Hard capital D Data
         </p>
@@ -26,16 +27,6 @@ function App() {
       </div>
       <div >
         <FetchStDevVAvg supabase={supabase} />
-      </div>
-      <div>
-        <FetchPlayerInfo supabase={supabase} onDataFetched={handlePlayerInfo} />
-        {/* Display the fetched data */}
-        {playerInfo && (
-          <div>
-            <h2>Fetched Data:</h2>
-            <pre>{JSON.stringify(playerInfo, null, 2)}</pre>
-          </div>
-        )}
       </div>
     </>
   )
