@@ -90,7 +90,12 @@ function FetchStDevVAvg({ supabase }) {
             playerStatsArray.sort((a, b) => b.average - a.average);
             
             // Get the top 36 players
-            const topPlayers = playerStatsArray.slice(0, 36);
+            const topPlayers = playerStatsArray.slice(0, 36).map((player, index) => ({
+                ...player,
+                index: index + 1 // Adding 1 to start the index from 1 instead of 0
+            }));
+              
+            console.log(topPlayers[0], topPlayers[2]);
 
             const topPlayersWithFullname = topPlayers.map(player => {
                 const playerName = playerInfo.find(info => info.player_id === player.player_id);
@@ -114,39 +119,52 @@ function FetchStDevVAvg({ supabase }) {
                     mode: 'markers+text',
                     type: 'scatter',
                     name: player.fullname,
-                    text: [player.fullname],
+                    // text: [player.fullname],
                     textposition: 'top center',
                     textfont: {
                     family: 'Raleway, sans-serif'
                     },
-                    marker: { size: 12 }
+                    marker: { size: 6 }
                 }));
                 
                 const layout = {
+                    width: 400,
                     xaxis: {
-                    title: 'Average',
-                    range: [Math.min(...data.map(player => player.average)) - 1, Math.max(...data.map(player => player.average)) + 1]
+                        title: {
+                            text: 'Average',
+                            font: {
+                                size: 8
+                            }
+                        },
+                        range: [Math.min(...data.map(player => player.average)) - 1, Math.max(...data.map(player => player.average)) + 1]
                     },
                     yaxis: {
-                    title: 'Standard Deviation',
-                    range: [Math.min(...data.map(player => player.standardDeviation)) - 1, Math.max(...data.map(player => player.standardDeviation)) + 1]
+                        title: {
+                            text: 'Standard Deviation',
+                            font: {
+                                size: 8
+                            }
+                        },
+                        range: [Math.min(...data.map(player => player.standardDeviation)) - 1, Math.max(...data.map(player => player.standardDeviation)) + 1]
                     },
                     legend: {
-                    orientation: 'h',
-                    y: -0.2,
-                    x: 0.5,
-                    xanchor: 'center',
-                    yanchor: 'top',
-                    font: {
-                        family: 'Arial, sans-serif',
-                        size: 12,
-                        color: 'grey'
-                    }
+                        orientation: 'h',
+                        y: -0.2,
+                        x: 0.5,
+                        xanchor: 'center',
+                        yanchor: 'top',
+                        font: {
+                            family: 'Arial, sans-serif',
+                            size: 8,
+                            color: 'grey'
+                        }
                     },
-                    title: 'Player Statistics Scatter Plot'
+                    title: {
+                        text: 'StDev v Avg'
+                    }
                 };
                 
-                Plotly.newPlot('myDiv', traceData, layout);
+                Plotly.newPlot('myDiv', traceData, layout,{displayModeBar: false});
             };
 
             // rendering plot
