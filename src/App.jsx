@@ -24,7 +24,7 @@ function App() {
           capital A analysis
         </p>
       </div>
-      <div>
+      <div >
         <FetchStDevVAvg supabase={supabase} />
       </div>
       <div>

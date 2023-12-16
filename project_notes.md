@@ -42,15 +42,20 @@ NEXT STEPS
 5. using plotly instead of chart.js, because plotly can put markers on datapoints on scatterplots
     a. https://plotly.com/javascript/line-and-scatter/#data-labels-on-the-plot
     b. ADDED CHART!!! updates on input!!!
-        i. remove floating toolbar
+        i. remove floating toolbar - https://stackoverflow.com/questions/40125918/is-there-a-way-to-disable-hover-bar-mode-bar-in-plotly-py
         ii. make chart somewhat readable
     c. add another chart
+    d. FIGUREOUT WHY NOT UPDATED TO DARICECRUMB
 
 6. make interaction happen between user input & chart output
 7. make pretty
     i. add favicon
     ii. move over to daricecrumb.com
     iii. add a loading graphic
+
+COLORS: 
+light blue: #78abd5
+dark blue: #414b9b
 
 
 

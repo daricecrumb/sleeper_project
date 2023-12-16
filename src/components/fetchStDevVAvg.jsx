@@ -111,24 +111,33 @@ function FetchStDevVAvg({ supabase }) {
 
             // plotly plot
             const renderPlot = (data) => {
-                // Plotly setup based on fetched data
-                // ... (previous Plotly setup code)
                 const traceData = data.map(player => ({
                     x: [player.average],
                     y: [player.standardDeviation],
                     mode: 'markers+text',
                     type: 'scatter',
-                    name: player.fullname,
-                    // text: [player.fullname],
+                    name: `${player.index}: ${player.fullname}`,
+                    text: [player.index],
                     textposition: 'top center',
                     textfont: {
-                    family: 'Raleway, sans-serif'
+                        family: 'Raleway, sans-serif',
+                        size: 6
                     },
                     marker: { size: 6 }
                 }));
                 
                 const layout = {
-                    width: 400,
+                    width: 340,
+                    margin: {
+                        t: 40,
+                        b: 40,
+                        l: 40,
+                        r: 40
+                    },
+                    paper_bgcolor: "#C4DCED",
+                    title: {
+                        text: 'StDev v Avg'
+                    },
                     xaxis: {
                         title: {
                             text: 'Average',
@@ -136,7 +145,10 @@ function FetchStDevVAvg({ supabase }) {
                                 size: 8
                             }
                         },
-                        range: [Math.min(...data.map(player => player.average)) - 1, Math.max(...data.map(player => player.average)) + 1]
+                        tickfont: {
+                            size: 8
+                        },
+                        range: [Math.min(...data.map(player => player.average)) - 1, Math.max(...data.map(player => player.average)) + 1]                        
                     },
                     yaxis: {
                         title: {
@@ -144,6 +156,9 @@ function FetchStDevVAvg({ supabase }) {
                             font: {
                                 size: 8
                             }
+                        },
+                        tickfont: {
+                            size: 8
                         },
                         range: [Math.min(...data.map(player => player.standardDeviation)) - 1, Math.max(...data.map(player => player.standardDeviation)) + 1]
                     },
@@ -158,9 +173,6 @@ function FetchStDevVAvg({ supabase }) {
                             size: 8,
                             color: 'grey'
                         }
-                    },
-                    title: {
-                        text: 'StDev v Avg'
                     }
                 };
                 
@@ -197,7 +209,7 @@ function FetchStDevVAvg({ supabase }) {
                 }}
             />
             <button onClick={getStats}>Submit first 2</button>
-            <div id="myDiv" />
+            <div id="myDiv" class="chart"/>
         </>
     );
 }
