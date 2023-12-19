@@ -17,15 +17,6 @@ function App() {
   return (
     <>
       <div>
-      <Helmet>
-        <title>Mostly Legal Fantasy Football</title>
-          <meta property="og:title" content="Your Open Graph Title" />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://www.daricecrumb.com/ogp.jpg" />
-          <meta property="og:url" content="https://www.daricecrumb.com" />
-      </Helmet>
-      </div>
-      <div>
         <h1>Mostly Legal Fantasy Football</h1>
         <p>
           capital H Hard capital D Data
