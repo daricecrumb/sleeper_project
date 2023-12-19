@@ -18,10 +18,11 @@ function App() {
     <>
       <div>
       <Helmet>
-        <title>Helmet Title</title>
+        <title>Mostly Legal Fantasy Football</title>
           <meta property="og:title" content="Your Open Graph Title" />
-          <meta property="og:description" content="Your Open Graph Description" />
+          <meta property="og:type" content="website" />
           <meta property="og:image" content="https://www.daricecrumb.com/ogp.jpg" />
+          <meta property="og:url" content="https://www.daricecrumb.com" />
       </Helmet>
       </div>
       <div>
