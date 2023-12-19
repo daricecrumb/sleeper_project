@@ -127,7 +127,7 @@ function FetchStDevVAvg({ supabase }) {
                 }));
                 
                 const layout = {
-                    width: 340,
+
                     margin: {
                         t: 40,
                         b: 40,
@@ -233,6 +233,11 @@ function FetchStDevVAvg({ supabase }) {
                 <button class = "chart" onClick={getStats}>Submit Season + Position</button>
             </div>
             <div id="myDiv" class="chart"/>
+            <p>What is standard deviation, you might ask?</p>
+            <p>Standard deviation gives us an idea of a range in which most values fall, relative to the average</p>
+            <p>Higher standard deviation means a wider range of possible values (points) on any given week, like Taysom Hill or Gabe Davis</p>
+            <p>Lower standard deviation means a smaller possible range and less variance week-to-week</p>
+            <p>Data up to date as of week 14</p>
         </>
     );
 }
