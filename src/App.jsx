@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import FetchPlayerInfo from './components/fetchPlayerInfo';
 import FetchStDevVAvg from "./components/fetchStDevVAvg";
+import { Helmet } from 'react-helmet';
 import './App.css'
 
 
@@ -16,6 +16,14 @@ function App() {
 
   return (
     <>
+      <div>
+      <Helmet>
+        <title>Helmet Title</title>
+          <meta property="og:title" content="Your Open Graph Title" />
+          <meta property="og:description" content="Your Open Graph Description" />
+          <meta property="og:image" content="https://www.daricecrumb.com/ogp.jpg" />
+      </Helmet>
+      </div>
       <div>
         <h1>Mostly Legal Fantasy Football</h1>
         <p>

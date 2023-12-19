@@ -55,7 +55,10 @@ NEXT STEPS
 
 COLORS: 
 light blue: #78abd5
+blue: #636fb4
 dark blue: #414b9b
+lighter blue: #C4DCED
+brown: #84605E
 
 
 
