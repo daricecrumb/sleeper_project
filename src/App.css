@@ -12,12 +12,29 @@
   }
 }
 
-.chart {
+.top-space {
   margin-top: 40px;
+}
+
+.bold {
+  font-size: inherit;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.image {
+  max-width: 100%;
 }
 
 .dropdown {
   width: 200px;
+}
+
+.subheader {
+  font-size: 0.8em;
+  line-height: 1.1;
+  font-weight: 700; /* Custom boldness */
+  font-family: 'Futura', sans-serif;
 }
 
 .logo {

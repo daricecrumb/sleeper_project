@@ -37,6 +37,13 @@ h1 {
   font-family: 'Gill Sans', sans-serif;
 }
 
+p {
+  font-size: 1em;
+  line-height: 1.1;
+  font-weight: 300; /* Custom boldness */
+  font-family: 'Montserrat', sans-serif;
+}
+
 div {
   border-radius: 10px;
   overflow: hidden;

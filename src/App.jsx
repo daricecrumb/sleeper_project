@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import FetchStDevVAvg from "./components/fetchStDevVAvg";
 import './App.css'
@@ -12,13 +11,11 @@ function App() {
     <>
       <div>
         <h1>Mostly Legal Fantasy Football</h1>
-        <p>
-          capital H Hard capital D Data
+        <img class="image" src="/ogp.jpg" alt="League photo"></img>
+        <p class="subheader">
+          capital H Hard, capital D Data, capital A analysis
         </p>
-        <p>
-          capital A analysis
-        </p>
-        <p>Introducing...the top 36 players on average points for any position, any year,
+        <p class="top-space">Introducing...the top 36 players on average points for any position, any year,
           plotted on a chart with each players' standard deviation for points</p>
       </div>
       <div >

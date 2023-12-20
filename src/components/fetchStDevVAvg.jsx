@@ -189,7 +189,7 @@ function FetchStDevVAvg({ supabase }) {
 
     return (
         <>
-            <p>input season</p>
+            <p class='bold'>Select Season</p>
             <select 
                 class = "dropdown"
                 name="inputSeason"
@@ -214,7 +214,7 @@ function FetchStDevVAvg({ supabase }) {
                 <option value="2011">2011</option>
                 <option value="2010">2010</option>
             </select>
-            <p>input position</p>
+            <p class='bold'>Select Position</p>
             <select 
             class = "dropdown"
                 name="inputPosition"
@@ -230,7 +230,7 @@ function FetchStDevVAvg({ supabase }) {
                 <option value="TE">TE</option>
             </select>
             <div>
-                <button class = "chart" onClick={getStats}>Submit Season + Position</button>
+                <button class = "top-space" onClick={getStats}>Submit Season + Position</button>
             </div>
             <div id="myDiv" class="chart"/>
             <p>What is standard deviation, you might ask?</p>
