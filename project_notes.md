@@ -62,7 +62,8 @@ brown: #84605E
 
 
 
-OTHER NOTES
+OTHER NOTES:
+inspiration from here: 
 
 
 PROBLEMS FOUND:

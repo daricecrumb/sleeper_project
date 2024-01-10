@@ -159,7 +159,7 @@ app.post('/add_player_stats', async (req,res) => {
             console.log("successfully pulled settings")
 
         // iterate through weeks & seasons
-        const seasons = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+        const seasons = [2023]
         const weeks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
         let successfulAdd = []
         let errorCount = 0
@@ -280,5 +280,5 @@ app.post('/add_player_stats', async (req,res) => {
 // starts server
 app.listen(
     port,
-    () => console.log(`it's alive on http://localhost:${port}`)
+    () => console.log(`running from index.js, it's alive on http://localhost:${port}`)
 );
